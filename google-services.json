@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "225335581654",
+    "firebase_url": "https://pense-e-brinque-default-rtdb.firebaseio.com",
+    "project_id": "pense-e-brinque",
+    "storage_bucket": "pense-e-brinque.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225335581654:android:1400743dcda3321ffae277",
+        "android_client_info": {
+          "package_name": "com.penseebrinque.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBel2N32MFXvj86no4UTpSmmCqPyerRFTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

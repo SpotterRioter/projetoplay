@@ -12,6 +12,10 @@ const CadastroDados2 = () => {
     navigation.navigate("CadastroDados1");
   }, [navigation]);
 
+  const handleNext = async() =>{
+
+  }
+
   return (
     <>
       <View style={styles.cadastroDados3}>

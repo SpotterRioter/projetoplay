@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Text, StyleSheet, View, Pressable, Image} from "react-native";
+import { Text, StyleSheet, View, Pressable, Image, Alert} from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
+import GlobalServices from "../services/GlobalServices";
 
 const CadastroDados1 = () => {
   const navigation = useNavigation();
@@ -28,6 +29,17 @@ const CadastroDados1 = () => {
     navigation.navigate("CadastroDados");
   };
 
+  const handleNext = () =>{
+    if(meninaSelected && !meninoSelected){
+      GlobalServices.sexo = "Feminino"
+    } else {
+      if(meninoSelected && !meninaSelected){
+        GlobalServices.sexo = "Masculino"
+      } else { console.log("Error: CadastroDados1.js"); Alertlert("Selecione");return; }
+    }
+    navigation.navigate("CadastroDados2")
+  }
+
   return (
     <View style={styles.cadastroDados2}>
       <Pressable style={styles.backwardButton} onPress={handleBackwardPress}>
@@ -36,7 +48,7 @@ const CadastroDados1 = () => {
       <Text style={styles.faleMaisSobre}>Fale mais sobre você</Text>
       <Pressable
         style={styles.rectangleParent}
-        onPress={() => navigation.navigate("CadastroDados2")}
+        onPress={handleNext}
       >
         <View style={styles.groupChild} />
         <Text style={styles.prximo}>Próximo</Text>

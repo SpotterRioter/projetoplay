@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Pressable, TextInput, Alert } from "react-nativ
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Color, Border, FontFamily, FontSize } from "../GlobalStyles";
+import GlobalServices from "../services/GlobalServices";
 
 const CadastroDados = () => {
   const navigation = useNavigation();
@@ -28,7 +29,8 @@ const CadastroDados = () => {
       return;
     }
 
-
+    GlobalServices.nome = nome
+    GlobalServices.dataNasc = String(diaNumero + "/" + mesNumero + "/" + anoNumero)
     navigation.navigate("CadastroDados1");
   };
 
@@ -101,11 +103,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
-    fontWeight:"bold",
+    fontWeight: "bold",
     fontFamily: FontFamily.leagueSpartan,
     color: Color.colorGray,
     marginBottom: 20,
-    textAlign:"center"
+    textAlign: "center"
   },
   inputContainer: {
     marginBottom: 20,

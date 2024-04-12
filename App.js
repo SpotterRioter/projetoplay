@@ -1,15 +1,15 @@
 import * as React from "react";
+//#region
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import firebaseconf from "./screens/firebaseconf";
 import Login from "./screens/Login";
 import CadastroDados from "./screens/CadastroDados";
 import CadastroDados1 from "./screens/CadastroDados1";
 import CadastroDados2 from "./screens/CadastroDados2";
 import BeloCharacter from "./components/BeloCharacter";
 import CadastroDados3 from "./screens/CadastroDados3";
-import Home from "./screens/Home"; 
+import Home from "./screens/Home";
 import NoHumano from "./screens/NoHumano";
 import AcerteoCone from "./screens/AcerteoCone";
 import BolaVoadora from "./screens/BolaVoadora";
@@ -50,12 +50,15 @@ import FlyingBallQuiz2 from "./screens/FlyingBallQuiz2";
 import FlyingBallQuiz3 from "./screens/FlyingBallQuiz3";
 import FlyingBallQuiz4 from "./screens/FlyingBallQuiz4";
 import FlyingBallQuiz5 from "./screens/FlyingBallQuiz5";
-import { View, Text } from "react-native";
+//#endregion
 
-//Branch pedro
+//back-end imports
+import SimpleCalls from "./services/SimpleCalls";
+import SimplePull from "./services/SimplePull";
+import moment from "moment";
 
 const Stack = createNativeStackNavigator();
-
+//#region 
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
@@ -71,7 +74,12 @@ const App = () => {
   if (!fontsLoaded && !error) {
     return null;
   }
-
+  //#endregion
+  
+  //Enviando um sinal para a database de login
+  SimpleCalls("checkin");
+  //Se der tudo certo no terminal aparecera "Send use complete :)"
+  
   return (
     <>
       <NavigationContainer>
@@ -110,207 +118,207 @@ const App = () => {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="NoHumano"
               component={NoHumano}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="AcerteoCone"
               component={AcerteoCone}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="BolaVoadora"
               component={BolaVoadora}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="CuboMagico"
               component={CuboMagico}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="QueimadoXadrez"
               component={QueimadoXadrez}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="SinalTransito"
               component={SinalTransito}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="HumanNodeQuiz1"
               component={HumanNodeQuiz1}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="HumanNodeQuiz2"
               component={HumanNodeQuiz2}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="HumanNodeQuiz3"
               component={HumanNodeQuiz3}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="HumanNodeQuiz4"
               component={HumanNodeQuiz4}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="HumanNodeQuiz5"
               component={HumanNodeQuiz5}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ConeHitQuiz1"
               component={ConeHitQuiz1}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ConeHitQuiz2"
               component={ConeHitQuiz2}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ConeHitQuiz3"
               component={ConeHitQuiz3}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ConeHitQuiz4"
               component={ConeHitQuiz4}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ConeHitQuiz5"
               component={ConeHitQuiz5}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="MagicCubeQuiz1"
               component={MagicCubeQuiz1}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="MagicCubeQuiz2"
               component={MagicCubeQuiz2}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="MagicCubeQuiz3"
               component={MagicCubeQuiz3}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="MagicCubeQuiz4"
               component={MagicCubeQuiz4}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="MagicCubeQuiz5"
               component={MagicCubeQuiz5}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ChessBurnQuiz1"
               component={ChessBurnQuiz1}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ChessBurnQuiz2"
               component={ChessBurnQuiz2}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ChessBurnQuiz3"
               component={ChessBurnQuiz3}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ChessBurnQuiz4"
               component={ChessBurnQuiz4}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ChessBurnQuiz5"
               component={ChessBurnQuiz5}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ChessBurnQuiz6"
               component={ChessBurnQuiz6}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ChessBurnQuiz7"
               component={ChessBurnQuiz7}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ChessBurnQuiz8"
               component={ChessBurnQuiz8}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="TrafficSignalQuiz1"
               component={TrafficSignalQuiz1}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="TrafficSignalQuiz2"
               component={TrafficSignalQuiz2}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="TrafficSignalQuiz3"
               component={TrafficSignalQuiz3}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="TrafficSignalQuiz4"
               component={TrafficSignalQuiz4}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="TrafficSignalQuiz5"
               component={TrafficSignalQuiz5}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="TrafficSignalQuiz6"
               component={TrafficSignalQuiz6}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="FlyingBallQuiz1"
               component={FlyingBallQuiz1}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="FlyingBallQuiz2"
               component={FlyingBallQuiz2}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="FlyingBallQuiz3"
               component={FlyingBallQuiz3}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="FlyingBallQuiz4"
               component={FlyingBallQuiz4}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="FlyingBallQuiz5"
               component={FlyingBallQuiz5}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         ) : null}

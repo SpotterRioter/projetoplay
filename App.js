@@ -53,8 +53,8 @@ import FlyingBallQuiz5 from "./screens/FlyingBallQuiz5";
 //#endregion
 
 //back-end imports
-import SimpleCalls from "./services/SimpleCalls";
-import SimplePull from "./services/SimplePull";
+import UsePush from "./services/UseApp/UsePush";
+
 import moment from "moment";
 
 const Stack = createNativeStackNavigator();
@@ -77,7 +77,7 @@ const App = () => {
   //#endregion
   
   //Enviando um sinal para a database de login
-  SimpleCalls("checkin");
+  UsePush("checkin");
   //Se der tudo certo no terminal aparecera "Send use complete :)"
   
   return (

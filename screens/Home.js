@@ -3,6 +3,9 @@ import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Fontisto } from '@expo/vector-icons';
 import HumanoidContainer from "../components/HumanoidContainer";
+import GameUsePush from "../services/GameUse/GameUsePush";
+import GamePush from "../services/Games/GamePush";
+import GamePull from "../services/Games/GamePull";
 
 const Home = ({ iconColor = "white", iconSize = 24, iconPosition = "absolute", iconTop = 50, iconLeft = 260 }) => {
   const navigation = useNavigation();
@@ -34,37 +37,37 @@ const Home = ({ iconColor = "white", iconSize = 24, iconPosition = "absolute", i
       <Text style={styles.inicio}>Início</Text>
       <Pressable
         style={styles.humanNodeButton}
-        onPress={() => navigation.navigate("NoHumano")}
+        onPress={() => {navigation.navigate("NoHumano"); GameUsePush("NoHumano"); GamePush("Game1")}}//======================
       >
         <Text style={styles.humanNodeButtonText}>Nó Humano</Text>
       </Pressable>
       <Pressable
         style={styles.humanNodeButton2}
-        onPress={() => navigation.navigate("AcerteoCone")}
+        onPress={() => {navigation.navigate("AcerteoCone"); GameUsePush("AcerteOCone"); GamePush("Game2")}}
       >
         <Text style={styles.humanNodeButtonText}>Acerte o Cone</Text>
       </Pressable>
       <Pressable
         style={styles.humanNodeButton3}
-        onPress={() => navigation.navigate("BolaVoadora")}
+        onPress={() => {navigation.navigate("BolaVoadora"); GameUsePush("BolaVoadora"); GamePush("Game3")}}
       >
         <Text style={styles.humanNodeButtonText}>Bola Voadora</Text>
       </Pressable>
       <Pressable
         style={styles.humanNodeButton4}
-        onPress={() => navigation.navigate("CuboMagico")}
+        onPress={() => {navigation.navigate("CuboMagico"); GameUsePush("CuboMagico"); GamePush("Game4")}}
       >
         <Text style={styles.humanNodeButtonText}>Cubo Mágico</Text>
       </Pressable>
       <Pressable
         style={styles.humanNodeButton5}
-        onPress={() => navigation.navigate("QueimadoXadrez")}
+        onPress={() => {navigation.navigate("QueimadoXadrez"); GameUsePush("QueimadoXadrez"); GamePush("Game5")}}
       >
         <Text style={styles.humanNodeButtonText}>Queimado Xadrez</Text>
       </Pressable>
       <Pressable
         style={styles.humanNodeButton6}
-        onPress={() => navigation.navigate("SinalTransito")}
+        onPress={() => {navigation.navigate("SinalTransito"); GameUsePush("SinalDeTransito"); GamePush("Game6")}}
       >
         <Text style={styles.humanNodeButtonText}>Sinal de Trânsito</Text>
       </Pressable>

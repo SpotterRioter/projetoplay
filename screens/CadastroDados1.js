@@ -35,7 +35,7 @@ const CadastroDados1 = () => {
     } else {
       if(meninoSelected && !meninaSelected){
         GlobalServices.sexo = "Masculino"
-      } else { console.log("Error: CadastroDados1.js"); Alertlert("Selecione");return; }
+      } else { console.log("Error: CadastroDados1.js"); Alert.alert("Aviso", "Selecione uma das alternativas.");return; }
     }
     navigation.navigate("CadastroDados2")
   }

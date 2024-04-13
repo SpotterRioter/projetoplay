@@ -1,18 +1,22 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Pressable, TextInput, Alert } from "react-native";
+import { StyleSheet, View, Text, Pressable, TextInput, Alert, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { Color, Border, FontFamily, FontSize } from "../GlobalStyles";
 import GlobalServices from "../services/GlobalServices";
+import CreateUser from "../services/UserLogin/CreateUser";
 
 const CadastroDados = () => {
   const navigation = useNavigation();
 
   // Definindo estados para o nome, dia, mês e ano
-  const [nome, setNome] = React.useState('');
-  const [dia, setDia] = React.useState('');
-  const [mes, setMes] = React.useState('');
-  const [ano, setAno] = React.useState('');
+  const [nome, setNome] = React.useState('Pedro henrique');
+  const [email, setEmail] = React.useState('Phal@etepd.com');
+  const [senha, setSenha] = React.useState('Lino2006/');
+  const [dia, setDia] = React.useState('15');
+  const [mes, setMes] = React.useState('11');
+  const [ano, setAno] = React.useState('2006');
+  const simbolos = ['!', '|', '\\', '@', '#', '$', '£', '%', '¢', '¨', '¬', '&', '*', ',', '.', '*', '(', ')', '<', '>', '-', '_', ';', ':', '=', '+', '§', '[', ']', '{', '}', 'ª', 'º', '/', '?', '°', '~', '^', '']
 
   const validarData = () => {
     const diaNumero = parseInt(dia);
@@ -29,62 +33,110 @@ const CadastroDados = () => {
       return;
     }
 
+    let senhaForte = false;
+
+    switch (true) {
+      case senha.length < 8: Alert.alert('Aviso', 'Por favor, insira uma senha maior.'); break;
+      case senha.length >= 8:
+        for (let i = 0; senha.length > i; i++) {
+          for (let z = 0; simbolos.length > z; z++) {
+            if (senha[i] == simbolos[z]) {
+              senhaForte = true;
+            }
+          }
+        }
+        if (!senhaForte) {
+          Alert.alert('Aviso', 'Por favor, insira uma senha que possua simbolos, numeros ou letras maiúsculas.');
+          return
+        }
+        break;
+
+    }
+
+    if (!email.includes("@")) {
+      Alert.alert('Aviso', 'Por favor, insira uma senha que possua simbolos, numeros ou letras maiúsculas.');
+      return
+    }
+
     GlobalServices.nome = nome
     GlobalServices.dataNasc = String(diaNumero + "/" + mesNumero + "/" + anoNumero)
+    GlobalServices.email = email
+    GlobalServices.senha = senha
+
     navigation.navigate("CadastroDados1");
   };
 
   return (
     <View style={styles.container}>
-      <Ionicons
-        name="arrow-back"
-        size={32}
-        color={Color.colorHotpink}
-        style={[styles.icon, { marginTop: "15%" }]}
-        onPress={() => navigation.navigate("Login")}
-      />
-      <Text style={[styles.title, { marginTop: "50%" }]}>Fale mais sobre você</Text>
-      <View style={[styles.inputContainer]}>
-        <Text style={styles.inputLabel}>Qual é o seu nome?</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Digite seu nome"
-          value={nome}
-          onChangeText={setNome}
+      <ScrollView>
+        <Ionicons
+          name="arrow-back"
+          size={32}
+          color={Color.colorHotpink}
+          style={[styles.icon, { marginTop: "15%" }]}
+          onPress={() => navigation.navigate("Login")}
         />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.inputLabel}>Qual a data do seu aniversário?</Text>
-        <View style={styles.dateContainer}>
+        <Text style={[styles.title, { marginTop: "40%" }]}>Fale mais sobre você</Text>
+        <View style={[styles.inputContainer]}>
+          <Text style={styles.inputLabel}>Qual é o seu nome?</Text>
           <TextInput
-            style={[styles.input, styles.dateInput]}
-            placeholder="Dia"
-            keyboardType="numeric"
-            value={dia}
-            onChangeText={text => setDia(text)}
-          />
-          <TextInput
-            style={[styles.input, styles.dateInput]}
-            placeholder="Mês"
-            keyboardType="numeric"
-            value={mes}
-            onChangeText={text => setMes(text)}
-          />
-          <TextInput
-            style={[styles.input, styles.dateInput]}
-            placeholder="Ano"
-            keyboardType="numeric"
-            value={ano}
-            onChangeText={text => setAno(text)}
+            style={styles.input}
+            placeholder="Digite seu nome"
+            value={nome}
+            onChangeText={setNome}
           />
         </View>
-      </View>
-      <Pressable
-        style={styles.button}
-        onPress={validarData}
-      >
-        <Ionicons name="arrow-forward" size={24} color={Color.colorWhite} />
-      </Pressable>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Qual a data do seu aniversário?</Text>
+          <View style={styles.dateContainer}>
+            <TextInput
+              style={[styles.input, styles.dateInput]}
+              placeholder="Dia"
+              keyboardType="numeric"
+              value={dia}
+              onChangeText={text => setDia(text)}
+            />
+            <TextInput
+              style={[styles.input, styles.dateInput]}
+              placeholder="Mês"
+              keyboardType="numeric"
+              value={mes}
+              onChangeText={text => setMes(text)}
+            />
+            <TextInput
+              style={[styles.input, styles.dateInput]}
+              placeholder="Ano"
+              keyboardType="numeric"
+              value={ano}
+              onChangeText={text => setAno(text)}
+            />
+          </View>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Qual o seu email?</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Digite seu email"
+            value={email}
+            onChangeText={setEmail}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputLabel}>Qual senha você deseja ter?</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Digite sua senha"
+            value={senha}
+            onChangeText={setSenha}
+          />
+        </View>
+        <Pressable
+          style={styles.button}
+          onPress={validarData}
+        >
+          <Ionicons name="arrow-forward" size={24} color={Color.colorWhite} />
+        </Pressable>
+      </ScrollView>
     </View>
   );
 };

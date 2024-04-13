@@ -1,9 +1,9 @@
-import app from "./Inicialize";
+import app from "../Inicialize";
 import moment from "moment";
 import { collection, doc, getFirestore, setDoc, updateDoc, getDoc } from 'firebase/firestore'
 
 
-export default async function SimplePull() {
+export default async function UsePull() {
     const db = getFirestore(app);
     const dataAtual = moment().format("YYYY") + moment().format("MM");
     const docRef = doc(db, 'AppUse', dataAtual);

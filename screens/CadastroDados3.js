@@ -1,10 +1,41 @@
 import * as React from "react";
-import { Image, StyleSheet, View, Text, Pressable } from "react-native";
+import { Image, StyleSheet, View, Text, Pressable, BackHandler, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize } from "../GlobalStyles";
+import CreateDocUser from "../services/UserLogin/CreateDocUser";
+import GlobalServices from "../services/GlobalServices";
+import CreateUser from "../services/UserLogin/CreateUser";
 
 const CadastroDados3 = () => {
   const navigation = useNavigation();
+
+  React.useEffect(() => {
+    const handleLogin = async () => {
+      CreateUser(GlobalServices.email, GlobalServices.senha)
+    }
+    handleLogin()
+  }, [])
+
+  React.useEffect(() => {
+    const backAction = () => {
+      // Impede o comportamento padrão do botão de voltar
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    // Remover o event listener quando o componente for desmontado ou quando a tela deixar de ser ativa
+    return () => backHandler.remove();
+
+  }, []);
+
+  if (GlobalServices.error) {
+    navigation.navigate("CadastroDados")
+    Alert.alert("Aviso", "Este email já foi utilizado.")
+  }
 
   const navigateToHome = () => {
     navigation.navigate("Home");

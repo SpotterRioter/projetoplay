@@ -1,9 +1,10 @@
-import app from "./Inicialize";
+import app from "../Inicialize";
 import { collection, doc, getFirestore, setDoc, updateDoc } from 'firebase/firestore'
-import moment from "moment";
-import SimplePull from "./SimplePull";
 
-export default async function SimpleCalls(parameter) {
+import moment from "moment";
+import UsePull from "./UsePull";
+
+export default async function UsePush(parameter) {
     const db = getFirestore(app);
     const data = moment().format("YYYY") + moment().format("MM");
     const hora = moment().format("HH");
@@ -15,7 +16,7 @@ export default async function SimpleCalls(parameter) {
             let itemToPush = "Error";
             //Fazendo a condicionalizacao do horario
             const handleUpdateCheckIn = async () => {
-                const picos = await SimplePull()
+                const picos = await UsePull()
                 const handleUpdate = async ( parameter ) => {
                     const ref = doc(db, 'AppUse', data);
                     const valueToUpdate = picos["Pico" + parameter]

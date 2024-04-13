@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Image } from "expo-image";
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, BackHandler } from "react-native";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native"; // Importando useNavigation
 import { FontSize, Color, FontFamily } from "../GlobalStyles";
+
+import UserScorePush from "../services/UsersScore/UserScorePush";
 
 const ConeHitQuiz1 = () => {
   const navigation = useNavigation(); // Inicializando useNavigation
@@ -20,10 +22,30 @@ const ConeHitQuiz1 = () => {
     setShowCorrectAnswer(true);
     if (selectedAnswer === "answer3") {
       setCorrectAnswer("answer3");
+      UserScorePush("Game2", true)
+    } else {
+      UserScorePush("Game2", false)
     }
     // Navegar para a próxima tela
     navigation.navigate("ConeHitQuiz2");
   };
+
+  React.useEffect(() => {
+    const backAction = () => {
+      navigation.goBack()
+      return true;
+    };
+
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    // Remover o event listener quando o componente for desmontado ou quando a tela deixar de ser ativa
+    return () => backHandler.remove();
+
+  }, []);
 
   return (
     <View style={styles.quiz}>
@@ -43,7 +65,7 @@ const ConeHitQuiz1 = () => {
       <Text style={styles.noNHumano}>
         Qual a sua missão durante o jogo?
       </Text>
-      <View style={[styles.rectangleParent, styles.groupLayout, {top: 360}]}>
+      <View style={[styles.rectangleParent, styles.groupLayout, { top: 360 }]}>
         <View style={[styles.groupChild, styles.groupChildPosition]} />
         <Pressable
           onPress={() => handleAnswerSelection("answer1")}
@@ -57,7 +79,7 @@ const ConeHitQuiz1 = () => {
           <Text style={styles.answerText}>Ver quem joga a bola mais alto</Text>
         </Pressable>
       </View>
-      <View style={[styles.rectangleGroup, styles.groupLayout, {top: 420}]}>
+      <View style={[styles.rectangleGroup, styles.groupLayout, { top: 420 }]}>
         <View style={[styles.groupChild, styles.groupChildPosition]} />
         <Pressable
           onPress={() => handleAnswerSelection("answer2")}
@@ -71,7 +93,7 @@ const ConeHitQuiz1 = () => {
           <Text style={styles.answerText}>Apenas derrubar o cone do adversário</Text>
         </Pressable>
       </View>
-      <View style={[styles.rectangleContainer, styles.groupLayout, {top: 480}, {height: 120}]}>
+      <View style={[styles.rectangleContainer, styles.groupLayout, { top: 480 }, { height: 120 }]}>
         <View style={[styles.groupChild, styles.groupChildPosition]} />
         <Pressable
           onPress={() => handleAnswerSelection("answer3")}

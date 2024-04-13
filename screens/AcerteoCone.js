@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, BackHandler } from "react-native";
 import { Image } from "expo-image";
 import { Video } from "expo-av";
 import { useNavigation } from "@react-navigation/native";

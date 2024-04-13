@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useNavigation } from "@react-navigation/native"; // Importando useNavigation
 import { FontSize, Color, FontFamily } from "../GlobalStyles";
 
+import UserScorePush from "../services/UsersScore/UserScorePush";
+
 const  MagicCubeQuiz4 = () => {
   const navigation = useNavigation(); // Inicializando useNavigation
 
@@ -20,6 +22,9 @@ const  MagicCubeQuiz4 = () => {
     setShowCorrectAnswer(true);
     if (selectedAnswer === "true") {
       setCorrectAnswer("true");
+      UserScorePush("Game4", true)
+    } else {
+      UserScorePush("Game4", false)
     }
     // Navegar para a próxima tela
     navigation.navigate("MagicCubeQuiz5");

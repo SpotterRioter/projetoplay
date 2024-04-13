@@ -21,7 +21,7 @@ export default GameUsePush = async (game) => {
         if (valuesFromDB) {
             switch (true) {
                 case game == "NoHumano": handleUpdate("Game1"); break;
-                case game == "AcerteOCone": handleUpdate("Game2"); break;
+                case game == "AcerteoCone": handleUpdate("Game2"); break;
                 case game == "BolaVoadora": handleUpdate("Game3"); break;
                 case game == "CuboMagico": handleUpdate("Game4"); break;
                 case game == "QueimadoXadrez": handleUpdate("Game5"); break;

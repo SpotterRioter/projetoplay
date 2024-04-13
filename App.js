@@ -85,7 +85,7 @@ const App = () => {
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Login">
             <Stack.Screen
               name="Login"
               component={Login}
@@ -147,7 +147,7 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="SinalTransito"
+              name="SinalDeTransito"
               component={SinalTransito}
               options={{ headerShown: false }}
             />

@@ -1,62 +1,109 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Pressable, TextInput } from "react-native";
+import { StyleSheet, View, Text, Pressable, TextInput, Alert } from "react-native";
 import { Image } from "expo-image";
 import { useNavigation } from "@react-navigation/native";
 import { Color, Border, FontSize, FontFamily } from "../GlobalStyles";
+import UserSingIn from "../services/UserSingIn/UserSingIn";
+import GlobalServices from "../services/GlobalServices";
 
 const Login = () => {
   const navigation = useNavigation();
+
+  const [email, setEmail] = React.useState('')
+  const [senha, setSenha] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
+
+  const handleVerification = async () => {
+    if (!GlobalServices.userId || !GlobalServices.errorCode) {
+      setTimeout(() => {
+        if (GlobalServices.userId) {
+          navigation.navigate("Home")
+          return
+        }
+        if (GlobalServices.errorCode) {
+          if (GlobalServices.errorCode == 'auth/invalid-credential') {
+            Alert.alert("Aviso", "Email ou senha incorretas")
+          }
+          if (GlobalServices.errorCode == 'auth/too-many-requests') {
+            Alert.alert("Aviso", "Tentativas esgotadas, tente novamente mais tarde ou feche e abra novamente o aplicativo")
+          }
+          setLoading(false)
+          GlobalServices.errorCode = undefined
+          return
+        }
+        handleVerification()
+      }, 1000)
+    }
+  }
+
+  handleVerification()
+
 
   const handleCadastroPress = () => {
     navigation.navigate("CadastroDados");
   };
 
+  const handleSingIn = async () => {
+    UserSingIn(email, senha).then(() => {
+      setLoading(true)
+    }).catch((e) => { console.log("Error on Login:" + e) })
+  }
+
+
 
   return (
     <View style={styles.login}>
-    
-      
+
       <TextInput
         style={[styles.input, styles.email]}
         placeholder="E-mail"
+        value={email}
+        onChangeText={setEmail}
       />
       <TextInput
         style={[styles.input, styles.senha]}
         placeholder="Senha"
         secureTextEntry={true}
+        value={senha}
+        onChangeText={setSenha}
       />
       <Pressable
         style={[styles.rectangleParent, styles.groupChildLayout]}
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => { handleSingIn() }}
       >
-        <View style={[styles.groupChild, styles.groupChildLayout, {left: 10}]} />
-        <Text style={[styles.entrar, styles.entrarTypo, {left: 100}]}>Entrar</Text>
+        <View style={[styles.groupChild, styles.groupChildLayout, { left: 10 }]} />
+        {
+          loading?
+          <Text style={[styles.entrar, styles.entrarTypo, { left: 100 }]}>Processando</Text>
+          :
+          <Text style={[styles.entrar, styles.entrarTypo, { left: 100 }]}>Entrar</Text>
+        }
       </Pressable>
-      <Text style={[styles.noTemContaContainer, styles.ouPosition, {left: 200}]}>
+      <Text style={[styles.noTemContaContainer, styles.ouPosition, { left: 200 }]}>
         <Text style={styles.noTemConta}>{`Não tem conta? `}</Text>
         <Text style={styles.cadastreSe} onPress={handleCadastroPress}>Cadastre-se</Text>
       </Text>
-   
+
       <View style={styles.belo}>
         <Image
-        style={styles.logoUfpe}
-        source={require("../assets/logoufpe.svg")} // Altere o caminho conforme a localização do seu arquivo de imagem
-      />
-      <Image
-        style={styles.etepd}
-        source={require("../assets/etepdlogo.svg")} // Altere o caminho conforme a localização do seu arquivo de imagem
-      />
-       <Image
-        style={styles.belo2}
-        source={require("../assets/belo.svg")} // Altere o caminho conforme a localização do seu arquivo de imagem
-      />
+          style={styles.logoUfpe}
+          source={require("../assets/logoufpe.svg")} // Altere o caminho conforme a localização do seu arquivo de imagem
+        />
+        <Image
+          style={styles.etepd}
+          source={require("../assets/etepdlogo.svg")} // Altere o caminho conforme a localização do seu arquivo de imagem
+        />
+        <Image
+          style={styles.belo2}
+          source={require("../assets/belo.svg")} // Altere o caminho conforme a localização do seu arquivo de imagem
+        />
       </View>
       <Image
         style={styles.logoUfpeInicial1}
         contentFit="cover"
         source={require("../assets/logo-ufpe-inicial-1.png")}
       />
-      
+
     </View>
   );
 }

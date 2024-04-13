@@ -7,6 +7,9 @@ export default class GlobalServices{
     static dataNasc = ""
     static sexo = ""
 
-    static error = true
-    static errorCode = ''
+    static UserCreated = false
+
+    static errorCode = undefined
+
+    static userUseless = false
 }

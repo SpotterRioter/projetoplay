@@ -10,12 +10,12 @@ const CadastroDados = () => {
   const navigation = useNavigation();
 
   // Definindo estados para o nome, dia, mês e ano
-  const [nome, setNome] = React.useState('Pedro henrique');
-  const [email, setEmail] = React.useState('Phal@etepd.com');
-  const [senha, setSenha] = React.useState('Lino2006/');
-  const [dia, setDia] = React.useState('15');
-  const [mes, setMes] = React.useState('11');
-  const [ano, setAno] = React.useState('2006');
+  const [nome, setNome] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [senha, setSenha] = React.useState('');
+  const [dia, setDia] = React.useState('');
+  const [mes, setMes] = React.useState('');
+  const [ano, setAno] = React.useState('');
   const simbolos = ['!', '|', '\\', '@', '#', '$', '£', '%', '¢', '¨', '¬', '&', '*', ',', '.', '*', '(', ')', '<', '>', '-', '_', ';', ':', '=', '+', '§', '[', ']', '{', '}', 'ª', 'º', '/', '?', '°', '~', '^', '']
 
   const validarData = () => {

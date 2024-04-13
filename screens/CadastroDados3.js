@@ -8,6 +8,7 @@ import CreateUser from "../services/UserLogin/CreateUser";
 
 const CadastroDados3 = () => {
   const navigation = useNavigation();
+  const [loading, setLoading] = React.useState(false)
 
   const handleLogin = async () => {
     CreateUser(GlobalServices.email, GlobalServices.senha)
@@ -30,13 +31,39 @@ const CadastroDados3 = () => {
 
   }, []);
 
-  const navigateToHome = () => {
-    if (GlobalServices.error) {
-      navigation.navigate("CadastroDados")
-      Alert.alert("Aviso", "Este email já foi utilizado.")
-    } else { CreateDocUser();navigation.navigate("Home"); }
-  };
 
+
+  const handleVerification = async () => {
+    if (!GlobalServices.userId || !GlobalServices.errorCode) {
+      setTimeout(() => {
+        if (GlobalServices.userId) {
+          navigation.navigate("Home")
+          return
+        }
+        if (GlobalServices.errorCode) {
+          if (GlobalServices.errorCode == 'auth/invalid-email') {
+            Alert.alert("Aviso", "Email invalido")
+          }
+          if (GlobalServices.errorCode == 'auth/email-already-in-use') {
+            Alert.alert("Aviso", "Email ja utilizado, tente usar outro ou redefina a senha")
+            navigation.navigate("Login")
+          }
+          setLoading(false)
+          GlobalServices.errorCode = undefined
+          return
+        }
+        handleVerification()
+      }, 1000)
+    }
+  }
+
+  handleVerification()
+
+  const navigateToHome = () => {
+    CreateDocUser().then(()=>{
+      setLoading(true)
+    }).catch((e)=>{ console.log("Error on CadastroDados3: " + e) })
+  };
   return (
     <View style={styles.cadastroDados5}>
       <Image

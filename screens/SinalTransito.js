@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, BackHandler } from "react-native";
 import { Image } from "expo-image";
 import { Video } from "expo-av";
 import { useNavigation } from "@react-navigation/native";
@@ -7,6 +7,23 @@ import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 
 const SinalTransito = () => {
   const navigation = useNavigation();
+
+  React.useEffect(() => {
+    const backAction = () => {
+      navigation.goBack()
+      return true;
+    };
+
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    // Remover o event listener quando o componente for desmontado ou quando a tela deixar de ser ativa
+    return () => backHandler.remove();
+
+  }, []);
 
   return (
     <View style={styles.androidLarge2}>

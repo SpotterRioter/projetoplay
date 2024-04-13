@@ -5,7 +5,12 @@ import { useState } from "react";
 import { useNavigation } from "@react-navigation/native"; // Importando useNavigation
 import { FontSize, Color, FontFamily } from "../GlobalStyles";
 
+import UserScorePush from "../services/UsersScore/UserScorePush";
+
 const ChessBurnQuiz1 = () => {
+
+  
+
   const navigation = useNavigation(); // Inicializando useNavigation
 
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -20,10 +25,14 @@ const ChessBurnQuiz1 = () => {
     setShowCorrectAnswer(true);
     if (selectedAnswer === "answer3") {
       setCorrectAnswer("answer3");
+      UserScorePush("Game5", true)
+    } else {
+      UserScorePush("Game5", false)
     }
     // Navegar para a próxima tela
     navigation.navigate("ChessBurnQuiz2");
   };
+
 
   return (
     <View style={styles.quiz}>
@@ -43,8 +52,8 @@ const ChessBurnQuiz1 = () => {
       <Text style={styles.noNHumano}>
         No queimado xadrez a equipe adversária não pode saber quais peças a outra equipe escolheu, porque:
       </Text>
-      <View style={[styles.rectangleParent, styles.groupLayout, {top: 360}, {height: 320}]}>
-        <View style={[styles.groupChild, styles.groupChildPosition, {height: 60}]} />
+      <View style={[styles.rectangleParent, styles.groupLayout, { top: 360 }, { height: 320 }]}>
+        <View style={[styles.groupChild, styles.groupChildPosition, { height: 60 }]} />
         <Pressable
           onPress={() => handleAnswerSelection("answer1")}
           style={[
@@ -57,8 +66,8 @@ const ChessBurnQuiz1 = () => {
           <Text style={styles.answerText}>Porque a ideia é que memorizem as peças e criem estratégias</Text>
         </Pressable>
       </View>
-      <View style={[styles.rectangleGroup, styles.groupLayout, {top: 430}]}>
-        <View style={[styles.groupChild, styles.groupChildPosition, {height: 50}]} />
+      <View style={[styles.rectangleGroup, styles.groupLayout, { top: 430 }]}>
+        <View style={[styles.groupChild, styles.groupChildPosition, { height: 50 }]} />
         <Pressable
           onPress={() => handleAnswerSelection("answer2")}
           style={[
@@ -68,10 +77,10 @@ const ChessBurnQuiz1 = () => {
             showCorrectAnswer && correctAnswer !== "answer2" && selectedAnswer === "answer2" && styles.incorrectAnswer,
           ]}
         >
-          <Text style={styles.answerText, {height: 50}}>Porque isso será descoberto durante o jogo</Text>
+          <Text style={[styles.answerText, { height: 50 }]}>Porque isso será descoberto durante o jogo</Text>
         </Pressable>
       </View>
-      <View style={[styles.rectangleContainer, styles.groupLayout, {top: 490}, {height: 120}]}>
+      <View style={[styles.rectangleContainer, styles.groupLayout, { top: 490 }, { height: 120 }]}>
         <View style={[styles.groupChild, styles.groupChildPosition]} />
         <Pressable
           onPress={() => handleAnswerSelection("answer3")}

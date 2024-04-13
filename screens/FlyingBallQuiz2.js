@@ -4,7 +4,8 @@ import { StyleSheet, View, Text, Pressable } from "react-native";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native"; // Importando useNavigation
 import { FontSize, Color, FontFamily } from "../GlobalStyles";
-import FlyingBallQuiz1 from "./FlyingBallQuiz1";
+
+import UserScorePush from "../services/UsersScore/UserScorePush";
 
 const  FlyingBallQuiz2 = () => {
   const navigation = useNavigation(); // Inicializando useNavigation
@@ -21,6 +22,9 @@ const  FlyingBallQuiz2 = () => {
     setShowCorrectAnswer(true);
     if (selectedAnswer === "true") {
       setCorrectAnswer("true");
+      UserScorePush("Game3", true)
+    } else {
+      UserScorePush("Game3", false)
     }
     // Navegar para a próxima tela
     navigation.navigate("FlyingBallQuiz3");

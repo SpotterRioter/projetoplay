@@ -4,12 +4,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
 import GlobalServices from "../services/GlobalServices";
+import moment from "moment";
 
 const CadastroDados1 = () => {
   const navigation = useNavigation();
   const [meninoSelected, setMeninoSelected] = React.useState(false);
   const [meninaSelected, setMeninaSelected] = React.useState(false);
-
+  
   const handleMeninoPress = () => {
     setMeninoSelected(true);
     setMeninaSelected(false);

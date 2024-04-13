@@ -5,11 +5,10 @@ import { Fontisto } from '@expo/vector-icons';
 import HumanoidContainer from "../components/HumanoidContainer";
 import GameUsePush from "../services/GameUse/GameUsePush";
 import GamePush from "../services/Games/GamePush";
-import GamePull from "../services/Games/GamePull";
-
+import GlobalServices from "../services/GlobalServices";
 const Home = ({ iconColor = "white", iconSize = 24, iconPosition = "absolute", iconTop = 50, iconLeft = 260 }) => {
   const navigation = useNavigation();
-
+  console.log(GlobalServices.userId)
   return (
     <View style={styles.home}>
       <Pressable

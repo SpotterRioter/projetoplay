@@ -9,12 +9,10 @@ import CreateUser from "../services/UserLogin/CreateUser";
 const CadastroDados3 = () => {
   const navigation = useNavigation();
 
-  React.useEffect(() => {
-    const handleLogin = async () => {
-      CreateUser(GlobalServices.email, GlobalServices.senha)
-    }
-    handleLogin()
-  }, [])
+  const handleLogin = async () => {
+    CreateUser(GlobalServices.email, GlobalServices.senha)
+  }
+  handleLogin()
 
   React.useEffect(() => {
     const backAction = () => {
@@ -32,13 +30,11 @@ const CadastroDados3 = () => {
 
   }, []);
 
-  if (GlobalServices.error) {
-    navigation.navigate("CadastroDados")
-    Alert.alert("Aviso", "Este email já foi utilizado.")
-  }
-
   const navigateToHome = () => {
-    navigation.navigate("Home");
+    if (GlobalServices.error) {
+      navigation.navigate("CadastroDados")
+      Alert.alert("Aviso", "Este email já foi utilizado.")
+    } else { CreateDocUser();navigation.navigate("Home"); }
   };
 
   return (

@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, Pressable, Modal, Image } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons'; // Importando Ionicons
 import { Border, FontFamily, Color, FontSize } from "../GlobalStyles";
+import UsersAgePush from "../services/UsersAge/UsersAgePush";
 
 const CadastroDados2 = () => {
   const navigation = useNavigation();
@@ -12,7 +13,7 @@ const CadastroDados2 = () => {
     navigation.navigate("CadastroDados1");
   }, [navigation]);
 
-
+  UsersAgePush()
 
   return (
     <>

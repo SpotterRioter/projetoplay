@@ -7,5 +7,6 @@ export default class GlobalServices{
     static dataNasc = ""
     static sexo = ""
 
-    static error = false
+    static error = true
+    static errorCode = ''
 }

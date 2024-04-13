@@ -11,11 +11,13 @@ export default CreateUser = async (email, password) => {
             const user = userCredential.user;
             GlobalServices.userId = user.uid
             console.log(GlobalServices.userId)
+            GlobalServices.error = false
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.log("Error mensage CreateUser: "+errorCode)
+            GlobalServices.errorCode = errorCode
             GlobalServices.error = true
+            console.log(errorCode)
         })
 }

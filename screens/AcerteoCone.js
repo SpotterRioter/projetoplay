@@ -8,6 +8,23 @@ import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 const AcerteoCone = () => {
   const navigation = useNavigation();
 
+  React.useEffect(() => {
+    const backAction = () => {
+      navigation.goBack()
+      return true;
+    };
+
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    // Remover o event listener quando o componente for desmontado ou quando a tela deixar de ser ativa
+    return () => backHandler.remove();
+
+  }, []);
+
   return (
     <View style={styles.androidLarge2}>
       <Text style={[styles.jogueOQuiz, styles.jogueOQuizPosition]}>

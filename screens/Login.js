@@ -57,6 +57,7 @@ const Login = () => {
       <TextInput
         style={[styles.input, styles.email]}
         placeholder="E-mail"
+        keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
       />

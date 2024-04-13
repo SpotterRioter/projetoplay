@@ -82,7 +82,7 @@ const Home = ({ iconColor = "white", iconSize = 24, iconPosition = "absolute", i
       <Text style={styles.inicio}>Início</Text>
       <Pressable
         style={styles.humanNodeButton}
-        onPress={()=>{handleGameAcess("NoHumano", "Game2")}}
+        onPress={()=>{handleGameAcess("NoHumano", "Game1")}}
       >
         <Text style={styles.humanNodeButtonText}>Nó Humano</Text>
       </Pressable>

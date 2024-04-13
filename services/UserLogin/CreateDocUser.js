@@ -8,6 +8,7 @@ export default CreateDocUser = async () => {
     const userId = GlobalServices.userId;
     if (!userId) { console.log("Error on create UserDoc"); return }
     const idadeUser = parseInt(moment().format("YYYY")) - parseInt(GlobalServices.dataNasc.substring(6))
+
     const ref = collection(db, 'Users');
     await setDoc(doc(ref, userId), {
         DataNasc: GlobalServices.dataNasc,
@@ -17,6 +18,7 @@ export default CreateDocUser = async () => {
         Sexo: GlobalServices.sexo
     });
     //uSERfAVORITE =============
+    console.log("Users feito")
     const favoriteRef = collection(db, 'UsersFavorite');
     await setDoc(doc(favoriteRef, userId), {
         Game1Acess: 0,
@@ -27,6 +29,7 @@ export default CreateDocUser = async () => {
         Game6Acess: 0,
     })
     //UsersScores
+    console.log("Favorite feito")
     const scoreRef = collection(db, 'UsersScore');
     await setDoc(doc(scoreRef, userId), {
         Game1Hit: 0,
@@ -43,6 +46,7 @@ export default CreateDocUser = async () => {
         Game6Errors: 0,
     })
     //UsersUseless
+    console.log("Score feito")
     const uselessRef = collection(db, 'UsersUseless');
     await setDoc(doc(uselessRef, userId), {
         Pico02: 0,

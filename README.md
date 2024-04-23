@@ -1,1 +1,1 @@
-Sem o código de back-end. 
+Com conexão ao Firebase. 
